@@ -12,6 +12,7 @@ jobs:
             vcpkg_path: D:\mixxx-vcpkg
             vcpkg_bootstrap: .\bootstrap-vcpkg.bat
             vcpkg_triplet: x64-windows
+            vcpkg_linker_flags: /PROFILE
             vcpkg_host_triplet: x64-windows           
             vcpkg_overlay_ports: overlay/windows;overlay/ports
             vcpkg_packages_extras: angle libid3tag libmad qt5-winextras
