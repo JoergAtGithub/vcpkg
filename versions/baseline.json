@@ -2816,6 +2816,10 @@
       "baseline": "gamma-2018-01-27",
       "port-version": 6
     },
+    "gammaray": {
+      "baseline": "v3.0.0",
+      "port-version": 0
+    },
     "gasol": {
       "baseline": "2018-01-04",
       "port-version": 4
