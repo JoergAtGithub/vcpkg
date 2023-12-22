@@ -12,6 +12,7 @@
     "fdk-aac",
     "ffmpeg",
     "fftw3",
+    "gammaray",
     "grantlee",
     "gtest",
     "hidapi",
