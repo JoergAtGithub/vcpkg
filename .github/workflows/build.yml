@@ -15,6 +15,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - os: ubuntu-24.04-arm
+            vcpkg_path: C:\mixxx-vcpkg
+            vcpkg_bootstrap: .\bootstrap-vcpkg.bat
+            vcpkg_triplet: arm64-android
+            vcpkg_host_triplet: arm64-android          
+            check_disk_space: Get-PSDrive
           - os: windows-2022
             vcpkg_path: C:\mixxx-vcpkg
             vcpkg_bootstrap: .\bootstrap-vcpkg.bat
