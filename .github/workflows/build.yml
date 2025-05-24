@@ -56,11 +56,11 @@ jobs:
             check_disk_space: df -h
           - os: windows-2022
             deps_name: arm64-android
-            vcpkg_path: /home/runner/mixxx-vcpkg
-            vcpkg_bootstrap: ./bootstrap-vcpkg.sh
+            vcpkg_path: C:\mixxx-vcpkg
+            vcpkg_bootstrap: .\bootstrap-vcpkg.bat
             vcpkg_triplet: arm64-android
             vcpkg_host_triplet: x64-windows
-            check_disk_space: df -h
+            check_disk_space: Get-PSDrive
     env:
       VCPKG_DEFAULT_TRIPLET: ${{ matrix.vcpkg_triplet }}
       VCPKG_DEFAULT_HOST_TRIPLET: ${{ matrix.vcpkg_host_triplet }}
