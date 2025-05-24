@@ -107,9 +107,35 @@ jobs:
       run: ${{ matrix.vcpkg_bootstrap }}
       working-directory: ${{ matrix.vcpkg_path }}
    
-    - name: "[Linux/Android] autoconf-archive for Android build"
+    - name: "[Linux/Android] Install build dependencies Android build"
       if: runner.os == 'Linux'
-      run: sudo apt-get update && sudo apt-get install -y autoconf-archive libltdl-dev libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev libegl1-mesa-dev
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          autoconf-archive \
+          libegl1-mesa-dev \
+          libglu1-mesa-dev \
+          libltdl-dev \
+          libx11-xcb-dev \
+          libxcb1-dev \
+          libxcb-util-dev \
+          libxcb-icccm4-dev \
+          libxcb-image0-dev \
+          libxcb-keysyms1-dev \
+          libxcb-randr0-dev \
+          libxcb-render-util0-dev \
+          libxcb-render0-dev \
+          libxcb-shape0-dev \
+          libxcb-shm0-dev \
+          libxcb-sync-dev \
+          libxcb-xfixes0-dev \
+          libxcb-xinerama0-dev \
+          libxcb-xinput-dev \
+          libxcb-xkb-dev \
+          libxkbcommon-dev \
+          libxkbcommon-x11-dev \
+          libxi-dev \
+          libxrender-dev
 
     - name: "[macOS] Bootstrap vcpkg"
       if: runner.os == 'macOS'
