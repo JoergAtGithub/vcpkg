@@ -83,7 +83,8 @@
     "opusfile",
     {
       "name": "portaudio",
-      "features": ["asio"]
+      "features": [ "asio" ],
+      "platform": "!android"
     },
     "portmidi",
     "protobuf",
