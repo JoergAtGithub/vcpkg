@@ -54,12 +54,12 @@ jobs:
             developer_dir: /Applications/Xcode_15.4.app/Contents/Developer
             brew_extra: libtool
             check_disk_space: df -h
-          - os: ubuntu-24.04
+          - os: windows-2022
             deps_name: arm64-android
             vcpkg_path: /home/runner/mixxx-vcpkg
             vcpkg_bootstrap: ./bootstrap-vcpkg.sh
             vcpkg_triplet: arm64-android
-            vcpkg_host_triplet: x64-linux
+            vcpkg_host_triplet: x64-windows
             check_disk_space: df -h
     env:
       VCPKG_DEFAULT_TRIPLET: ${{ matrix.vcpkg_triplet }}
