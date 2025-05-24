@@ -47,7 +47,8 @@
       "features": [
         "fedora-ffmpeg-free-safe",
         "ffmpeg"
-      ]
+      ],
+      "platform": "!android"
     },
     "fftw3",
     "grantlee",
