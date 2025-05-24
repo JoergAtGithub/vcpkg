@@ -109,7 +109,7 @@ jobs:
    
     - name: "[Linux/Android] autoconf-archive for Android build"
       if: runner.os == 'Linux'
-      run: sudo apt-get update && sudo apt-get install -y autoconf-archive libltdl-dev
+      run: sudo apt-get update && sudo apt-get install -y autoconf-archive libltdl-dev libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev libegl1-mesa-dev
 
     - name: "[macOS] Bootstrap vcpkg"
       if: runner.os == 'macOS'
