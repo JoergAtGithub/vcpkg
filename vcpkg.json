@@ -47,7 +47,7 @@
       "features": [
         "fedora-ffmpeg-free-safe",
         "ffmpeg"
-      ]      
+      ]
     },
     "fftw3",
     "grantlee",
@@ -75,7 +75,7 @@
     "libopusenc",
     "libsndfile",
     "libusb",
-    "libvorbis",    
+    "libvorbis",
     "lilv",
     "mp3lame",
     "ms-gsl",
@@ -86,7 +86,10 @@
       "features": [ "asio" ],
       "platform": "!android"
     },
-    "portmidi",
+    {
+      "name": "portmidi",
+      "platform": "!android"
+    },
     "protobuf",
     "pthreads",
     "rubberband",
