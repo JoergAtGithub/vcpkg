@@ -106,6 +106,10 @@ jobs:
     - name: Bootstrap vcpkg
       run: ${{ matrix.vcpkg_bootstrap }}
       working-directory: ${{ matrix.vcpkg_path }}
+   
+    - name: "[Linux/Android] autoconf-archive for Android build"
+      if: runner.os == 'Linux'
+      run: sudo apt-get update && sudo apt-get install -y autoconf-archive
 
     - name: "[macOS] Bootstrap vcpkg"
       if: runner.os == 'macOS'
