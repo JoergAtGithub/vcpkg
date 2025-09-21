@@ -37,19 +37,11 @@
   },
   "dependencies": [
     "benchmark",
-    "chromaprint",
-    "fftw3",
+ 
     "gtest",
     "hidapi",
-    {
-      "name": "hss1394",
-      "platform": "windows | osx"
-    },
-    "libdjinterop",
-    "libebur128",
     "ms-gsl",
     "protobuf",
-    "pthreads",
-    "wavpack"
+    "pthreads"
   ]
 }
