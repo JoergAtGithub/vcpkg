@@ -38,9 +38,7 @@
   "dependencies": [
     "benchmark",
     "chromaprint",
-    "fdk-aac",
     "fftw3",
-    "grantlee",
     "gtest",
     "hidapi",
     {
