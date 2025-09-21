@@ -36,7 +36,6 @@
     }
   },
   "dependencies": [
-    "ableton-link",
     "benchmark",
     "chromaprint",
     "fdk-aac",
