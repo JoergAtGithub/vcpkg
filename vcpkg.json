@@ -47,33 +47,9 @@
     },
     "libdjinterop",
     "libebur128",
-    "libflac",
-    {
-      "name": "libid3tag",
-      "platform": "!osx & !ios"
-    },
-    "libkeyfinder",
-    {
-      "name": "libmad",
-      "platform": "!osx & !ios"
-    },
-    "liblo",
-    "libmodplug",
-    "libogg",
-    "libopusenc",
-    "libsndfile",
-    "libusb",
-    "libvorbis",    
-    "lilv",
-    "mp3lame",
     "ms-gsl",
-    "opus",
-    "opusfile",
     "protobuf",
     "pthreads",
-    "rubberband",
-    "soundtouch",
-    "taglib",
     "wavpack"
   ]
 }
