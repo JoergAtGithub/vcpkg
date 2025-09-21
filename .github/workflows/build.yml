@@ -15,12 +15,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-24.04-arm
-            vcpkg_path: /Users/runner/mixxx-vcpkg
+          - os: ubuntu-latest
+            vcpkg_path: /home/runner/mixxx-vcpkg
             vcpkg_bootstrap: ./bootstrap-vcpkg.sh
             vcpkg_triplet: arm64-android
-            vcpkg_host_triplet: arm64-android          
-            check_disk_space: Get-PSDrive
+            vcpkg_host_triplet: arm64-android
+            check_disk_space: df -h
+            android_abi: arm64-v8a
+            android_api: 21
           - os: windows-2022
             vcpkg_path: C:\mixxx-vcpkg
             vcpkg_bootstrap: .\bootstrap-vcpkg.bat
@@ -42,6 +44,8 @@ jobs:
     env:
       VCPKG_DEFAULT_TRIPLET: ${{ matrix.vcpkg_triplet }}
       VCPKG_DEFAULT_HOST_TRIPLET: ${{ matrix.vcpkg_host_triplet }}
+      ANDROID_ABI: ${{ matrix.android_abi }}
+      ANDROID_API: ${{ matrix.android_api }}
       DEPS_BASE_NAME: mixxx-deps
       DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
       MIXXX_VERSION: 2.6
