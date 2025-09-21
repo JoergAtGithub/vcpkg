@@ -39,12 +39,6 @@
     "benchmark",
     "chromaprint",
     "fdk-aac",
-    {
-      "name": "ffmpeg",
-      "features": [
-        "fedora-ffmpeg-free-safe"
-      ]      
-    },
     "fftw3",
     "grantlee",
     "gtest",
