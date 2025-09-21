@@ -39,7 +39,6 @@
     "benchmark",
  
     "gtest",
-    "hidapi",
     "ms-gsl",
     "protobuf",
     "pthreads"
