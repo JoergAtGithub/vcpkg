@@ -78,10 +78,6 @@
     "ms-gsl",
     "opus",
     "opusfile",
-    {
-      "name": "portaudio",
-      "features": ["asio"]
-    },
     "portmidi",
     "protobuf",
     "pthreads",
