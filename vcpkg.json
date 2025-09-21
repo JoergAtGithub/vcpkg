@@ -77,7 +77,6 @@
     "ms-gsl",
     "opus",
     "opusfile",
-    "portmidi",
     "protobuf",
     "pthreads",
     "rubberband",
