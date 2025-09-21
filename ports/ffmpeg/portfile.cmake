@@ -17,6 +17,7 @@ vcpkg_from_github(
         0040-ffmpeg-add-av_stream_get_first_dts-for-chromium.patch # Do not remove this patch. It is required by chromium
         0041-add-const-for-opengl-definition.patch
         0043-fix-miss-head.patch
+        0044-fix-vulkan-debug-callback-abi.patch
 )
 
 if(SOURCE_PATH MATCHES " ")
@@ -526,6 +527,12 @@ else()
     set(WITH_VPX OFF)
 endif()
 
+if("vulkan" IN_LIST FEATURES)
+    set(OPTIONS "${OPTIONS} --enable-vulkan")
+else()
+    set(OPTIONS "${OPTIONS} --disable-vulkan")
+endif()
+
 if("webp" IN_LIST FEATURES)
     set(OPTIONS "${OPTIONS} --enable-libwebp")
     set(WITH_WEBP ON)
@@ -578,6 +585,14 @@ if ("qsv" IN_LIST FEATURES)
 else()
     set(OPTIONS "${OPTIONS} --disable-libmfx")
     set(WITH_MFX OFF)
+endif()
+
+if ("vaapi" IN_LIST FEATURES)
+    set(OPTIONS "${OPTIONS} --enable-vaapi")
+    set(WITH_VAAPI ON)
+else()
+    set(OPTIONS "${OPTIONS} --disable-vaapi")
+    set(WITH_VAAPI OFF)
 endif()
 
 set(OPTIONS_CROSS "--enable-cross-compile")
@@ -853,11 +868,11 @@ if(VCPKG_TARGET_IS_WINDOWS)
         # pc files generally use non-msvc syntax with -Lfoo -lbar.
         file(READ "${file}" content)
         foreach(entry IN ITEMS Libs Libs.private)
-            if(content MATCHES "${entry}: ([^\n]*)")
+            if(content MATCHES "${entry}:( [^\n]*)")
                 set(old_value "${CMAKE_MATCH_1}")
                 string(REGEX REPLACE "-libpath:" "-L" new_value "${old_value}")
                 string(REGEX REPLACE " ([^ /]+)[.]lib" " -l\\1" new_value "${new_value}")
-                string(REPLACE "${entry}: ${old_value}" "${entry}: ${new_value}" content "${content}")
+                string(REPLACE "${entry}:${old_value}" "${entry}:${new_value}" content "${content}")
             endif()
         endforeach()
         file(WRITE "${file}" "${content}")
@@ -871,7 +886,7 @@ x_vcpkg_pkgconfig_get_modules(PREFIX FFMPEG_PKGCONFIG MODULES ${FFMPEG_PKGCONFIG
 
 function(append_dependencies_from_libs out)
     cmake_parse_arguments(PARSE_ARGV 1 "arg" "" "LIBS" "")
-    string(REGEX REPLACE "[ ]+" ";" contents "${arg_LIBS}")
+    separate_arguments(contents UNIX_COMMAND "${arg_LIBS}")
     list(FILTER contents EXCLUDE REGEX "^-F.+")
     list(FILTER contents EXCLUDE REGEX "^-framework$")
     list(FILTER contents EXCLUDE REGEX "^-L.+")

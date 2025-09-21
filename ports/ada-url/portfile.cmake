@@ -6,7 +6,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO ada-url/ada
     REF "v${VERSION}"
-    SHA512 dd9f74ce795a105a3fa989015fe915c246716b052b5e8f3f28eb83652da96610b4c1e7297c5757b8f5e3fa6f1737f44ae184795cd45106a84ca9bcfb558e825d
+    SHA512 0363a75671ee98ad833211e0eb11a09048f0658cf55ec8f10a228224feb3519ac3fda4fe3cb6732137f0a0ec7e23329b12c50be32b0e68d7706a403f30620962
     HEAD_REF main
     PATCHES
         no-cpm.patch
@@ -34,6 +34,7 @@ vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 
 vcpkg_cmake_config_fixup(PACKAGE_NAME ada CONFIG_PATH "lib/cmake/ada")
+vcpkg_fixup_pkgconfig()
 
 if("tools" IN_LIST FEATURES)
     vcpkg_copy_tools(TOOL_NAMES adaparse AUTO_CLEAN)

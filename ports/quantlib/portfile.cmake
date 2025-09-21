@@ -2,7 +2,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO lballabio/QuantLib
     REF "v${VERSION}"
-    SHA512 a3a3644f6b04ed82c3e94de523880618a8ffb9be7a3e181d4b40621dadb9fd16bdcad6e15653887d64aa325669b79fcb88faf2553c51521e3cbb96dc30fdf997
+    SHA512 bc6d3730472a0b687635bc0aeba6aae5121d86bb4ab8f20204d5608bd619dfdf441bbb0ae9899a1252bdad9c4cb0f34d3bc5195206ac015e8d183a8ea18d9301
     HEAD_REF master
 )
 
