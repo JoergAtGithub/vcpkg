@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Deploy artifacts (e.g. dmg, deb files) built by CI to downloads.mixxx.org.
 
-set -eu -o pipefail
+set -Eeuo pipefail
 
 [ -z "${SSH_HOST}" ] && echo "Please set the SSH_HOST env var." >&2 && exit 1
 [ -z "${SSH_KEY}" ] && echo "Please set the SSH_KEY env var." >&2 && exit 1
@@ -17,13 +17,17 @@ GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 DEST_PATH="${DESTDIR}/${GIT_BRANCH}/${OS}"
 TMP_PATH="${DESTDIR}/.tmp/${UPLOAD_ID}"
 
-echo "Deploying to $TMP_PATH, then to $DEST_PATH."
+echo "Deploying to ${TMP_PATH}, then to ${DEST_PATH}."
 
-# Start SSH agent
-ssh-agent -a ${SSH_AUTH_SOCK} > /dev/null
+eval "$(ssh-agent -s)" >/dev/null
+
+cleanup() {
+  eval "$(ssh-agent -k)" >/dev/null
+}
+trap cleanup EXIT
 
 # Add private key to SSH agent
-ssh-add - <<< "${SSH_KEY}"
+ssh-add - <<< "${SSH_KEY}" >/dev/null
 
 # realpath does not exist on macOS
 command -v realpath >/dev/null 2>&1 || realpath() {
