@@ -15,7 +15,7 @@ set -Eeuo pipefail
 SSH="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 DEST_PATH="${DESTDIR}/${GIT_BRANCH}/${OS}"
-TMP_PATH="${DESTDIR}/.tmp/${UPLOAD_ID}"
+TMP_PATH="../../.tmp/${UPLOAD_ID}"
 
 echo "Deploying to ${TMP_PATH}, then to ${DEST_PATH}."
 
@@ -54,13 +54,9 @@ do
     popd
 
     FILEEXT="${FILENAME##*.}"
+    
+    # Ensure directories exist
+    ${SSH} "${SSH_USER}@${SSH_HOST}" "mkdir -p '${DEST_PATH}' '${DEST_PATH}/${TMP_PATH}'"
 
-    rsync -e "${SSH}" --rsync-path="mkdir -p ${TMP_PATH} && rsync" -r --delete-after "${FILEPATH}" "${FILEPATH_HASH}" "${SSH_USER}@${SSH_HOST}:${TMP_PATH}"
-
-    # Move from the temporary path to the final destination.
-    ${SSH} "${SSH_USER}@${SSH_HOST}" << EOF
-    trap 'rm -rf "${TMP_PATH}"' EXIT
-    mkdir -p "${DEST_PATH}" &&
-    mv "${TMP_PATH}/${FILENAME}" "${TMP_PATH}/${FILENAME_HASH}" "${DEST_PATH}"
-EOF
+    rsync -e "${SSH}" --partial --partial-dir="${TMP_PATH}" --delay-updates -r "${FILEPATH}" "${FILEPATH_HASH}" "${SSH_USER}@${SSH_HOST}:${DEST_PATH}"
 done
