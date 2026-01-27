@@ -96,7 +96,7 @@ jobs:
     - name: "[macOS] Install dependencies for nuget & vcpkg"
       if: runner.os == 'macOS'
       run: |
-          brew update && brew install automake nasm autoconf-archive nuget ${{ matrix.brew_extra }}
+          brew update-if-needed && brew install automake nasm autoconf-archive nuget ${{ matrix.brew_extra }}
           sudo xcode-select --switch "$DEVELOPER_DIR"
           xcrun --show-sdk-version
 
@@ -280,23 +280,15 @@ jobs:
       # Use retry loop to work around intermittent transfer issue
       uses: nick-fields/retry@9417ab499314dfe692edb043ded2ff9b3f5f0a68 # v3
       with:
-        shell: bash
         max_attempts: 10
         timeout_minutes: 20
         retry_wait_seconds: 5
         command: |
           cd ${{ matrix.vcpkg_path }}
           .github/deploy.sh ${{ env.DEPS_BASE_NAME }}-${{ env.MIXXX_VERSION }}-${{ matrix.deps_name }}-${{ steps.vars.outputs.sha_short }}.zip
-        on_retry_command: |
-          if [[ "$RUNNER_OS" == "Windows" ]]; then
-            powershell -Command "Get-Process ssh-agent -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue"
-          else
-            killall ssh-agent || true
-          fi
       env:
         DESTDIR: public_html/downloads/dependencies
         OS: ${{ runner.os }}
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         SSH_HOST: downloads-hostgator.mixxx.org
         SSH_KEY: ${{ secrets.DOWNLOADS_HOSTGATOR_DOT_MIXXX_DOT_ORG_KEY }}
         SSH_PASSWORD: ${{ secrets.DOWNLOADS_HOSTGATOR_DOT_MIXXX_DOT_ORG_KEY_PASSWORD }}
