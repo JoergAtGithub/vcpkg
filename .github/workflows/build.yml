@@ -55,6 +55,13 @@ jobs:
             brew_extra: libtool
             check_disk_space: df -h
           - os: ubuntu-24.04
+            deps_name: x64-linux
+            vcpkg_path: /home/runner/mixxx-vcpkg
+            vcpkg_bootstrap: ./bootstrap-vcpkg.sh
+            vcpkg_triplet: x64-linux
+            vcpkg_host_triplet: x64-linux
+            check_disk_space: df -h
+          - os: ubuntu-24.04
             deps_name: arm64-android
             vcpkg_path: /home/runner/mixxx-vcpkg
             vcpkg_bootstrap: ./bootstrap-vcpkg.sh
@@ -174,11 +181,15 @@ jobs:
           echo "ANDROID_NDK_HOME=/usr/lib/android-sdk/ndk/${{ matrix.android_ndk }}" >> "${GITHUB_ENV}"   
           sudo sdkmanager --list_installed
 
+    - name: Check available disk space
+      run: ${{ matrix.check_disk_space }}
+
     # Remove unused pre-installed software as the runner runs out of space otherwise
     # Currently freeing up about 17.7G, ~20%
-    - name: "[android] Free up disk space"
-      if: startsWith(matrix.deps_name, 'arm64-android')
+    - name: "[ubuntu/android] Free up disk space"
+      if: runner.os == 'Linux'
       run: |
+          df -h
           sudo apt-get autoremove -y && sudo apt-get clean
           sudo rm -rf /home/packer                 # Free up 677M
           sudo rm -rf /opt/az                      # Free up 649M
@@ -197,7 +208,8 @@ jobs:
           sudo rm -rf /usr/share/swift             # Free up 3.2G
           sudo rm -rf /usr/local/share/vcpkg       # Size unknown, but obvious duplicate
 
-    - name: Check available disk space
+    - name: Check available disk space after cleanup
+      if: runner.os == 'Linux'
       run: ${{ matrix.check_disk_space }}
 
     - name: Build packages  
