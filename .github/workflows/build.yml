@@ -209,6 +209,7 @@ jobs:
       # Use retry loop to work around intermittent transfer issue
       uses: nick-fields/retry@9417ab499314dfe692edb043ded2ff9b3f5f0a68 # v3
       with:
+        shell: bash
         max_attempts: 10
         timeout_minutes: 20
         retry_wait_seconds: 5
