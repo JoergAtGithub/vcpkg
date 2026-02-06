@@ -161,9 +161,13 @@ jobs:
             mono-complete \
             libasound2-dev \
             libegl1-mesa-dev \
+            libgl1-mesa-dev \
+            libdrm-dev \
+            libgbm-dev \
             libghc-resolv-dev \
             libglu1-mesa-dev \
             libltdl-dev \
+            libsm-dev \
             libudev-dev \
             libx11-xcb-dev \
             libxi-dev \
