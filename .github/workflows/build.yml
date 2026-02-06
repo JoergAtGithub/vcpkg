@@ -126,6 +126,7 @@ jobs:
             libghc-resolv-dev \
             libglu1-mesa-dev \
             libltdl-dev \
+            libsm-dev \
             libudev-dev \
             libx11-xcb-dev \
             libxi-dev \
@@ -201,6 +202,7 @@ jobs:
           sudo apt-get remove -y 'powershell'
           sudo apt-get remove -y 'libgl1-mesa-dri'
           sudo apt-get remove -y '^mysql-.*'
+          sudo apt-get remove -Y 'android-sdk-.*'
           sudo apt-get autoremove -y && sudo apt-get clean
           sudo rm -rf /home/packer                 # Free up 677M
           sudo rm -rf /opt/az                      # Free up 649M
