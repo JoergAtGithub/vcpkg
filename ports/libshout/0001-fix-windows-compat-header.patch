@@ -1,4 +1,4 @@
-﻿diff --git a/net/sock.h b/net/sock.h
+diff --git a/net/sock.h b/net/sock.h
 --- a/net/sock.h
 +++ b/net/sock.h
 @@ -35,8 +35,14 @@
